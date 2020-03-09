@@ -118,7 +118,7 @@ s.vertex(0, 100);
 
 
 void draw() {
-  background((frameCount / 3) % 255, (frameCount / 5 + 10) % 255, (frameCount / 2 + 30) % 255);
+  background((frameCount) % 255, (frameCount * 2 + 10) % 255, (frameCount + 30) % 255);
   fill(255);
   stroke(255);
   shapeMode(CENTER);
@@ -146,9 +146,9 @@ void draw() {
   
   // draw !
   pushMatrix();
-  translate(width / 2 + 130, height / 2 - 10);
+  translate(width / 2 + 143, height / 2 - 10);
   drawShape(ExBarShape());
-    translate(-3, -30);
+    translate(-3, 10);
 
   drawShape(ExDotShape());
   popMatrix();
@@ -156,16 +156,17 @@ void draw() {
 
 
 void drawShape(PShape s) {
+    int rr = 3;
     PShape newShape = createShape();
     newShape.beginShape();
     newShape.noFill();
     newShape.stroke(255);
-    newShape.strokeWeight(1);
+    newShape.strokeWeight(2);
 
     for (int j = 0; j < s.getVertexCount(); j++) {
       PVector v = s.getVertex(j);
       
-      newShape.vertex(v.x + random(-2, 2) + sin(frameCount / 10.0 / 3.0) * 20, v.y + random(-2, 2) + cos(frameCount / 10.0 / 3.0) * 20);
+      newShape.vertex(v.x + random(-rr, rr) + sin(frameCount / 10.0 / 3.0) * 20, v.y + random(-rr, rr) + cos(frameCount / 10.0 / 3.0) * 20);
     }
     newShape.endShape(CLOSE);
     shape(newShape, 0, 0);
