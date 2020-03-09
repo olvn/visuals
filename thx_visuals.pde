@@ -2,7 +2,7 @@ PShape x;
 PShape[] letters = new PShape[5];
 
 void setup() {
-  size(640, 640, P2D);
+  fullScreen();
   frameRate(15);
   noSmooth();
   letters[0] = TShape();
@@ -118,10 +118,11 @@ s.vertex(0, 100);
 
 
 void draw() {
-  background(0);
+  background((frameCount / 3) % 255, (frameCount / 5 + 10) % 255, (frameCount / 2 + 30) % 255);
   fill(255);
   stroke(255);
   shapeMode(CENTER);
+  strokeWeight(4);
   
   // draw T
   pushMatrix();
