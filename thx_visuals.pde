@@ -1,16 +1,19 @@
 PShape x;
 PShape[] letters = new PShape[5];
+int rb = 1;
+float SCALEFACTOR = 1.3;
 
 void setup() {
-  fullScreen();
-  frameRate(15);
+  //fullScreen();
+  size(640, 480);
+  frameRate(19);
   noSmooth();
   letters[0] = TShape();
   letters[1] = HShape();
     letters[2] = XShape();
     letters[3] = ExBarShape();
     letters[4] = ExDotShape();
-
+  colorMode(HSB, 100);
 }
 
 PShape TShape() {
@@ -118,35 +121,68 @@ s.vertex(0, 100);
 
 
 void draw() {
-  background((frameCount) % 255, (frameCount * 2 + 10) % 255, (frameCount + 30) % 255);
+  //background(abs((sin(2 * frameCount / 100.0) + 1) * 255), abs((sin(3 * frameCount / 100.0) + 1) * 255), abs((sin(2.5 * frameCount / 100.0) + 1) * 255));
+  for (int i = 0; i < 16; i++) {
+    int rr1 = round(random(-rb, rb));
+    int rr2 = round(random(-rb, rb));
+    int rr3 = round(random(-rb, rb));
+    int rr4 = round(random(-rb, rb));
+    int rr5 = round(random(-rb, rb));
+    int rr6 = round(random(-rb, rb));
+        int rr7 = round(random(-rb, rb));
+    int rr8 = round(random(-rb, rb));
+
+
+    print(rr1, rr2, rr3, rr4, "\n");
+
+    fill((frameCount + (100 / 10) * i) % 100, 100, 100);
+    quad(width * (i / 16.0) + rr1, 
+          0 + rr2,
+          width * ((i + 1) / 16.0) + rr3,
+          0 + rr4,
+          width * ((i + 1) / 16.0) + rr5, 
+          height + rr6,
+          width * (i / 16.0) + rr7,
+          height + rr8); 
+  }
+  
   fill(255);
-  stroke(255);
+  //stroke(100, 100, 100);
+  noStroke();
   shapeMode(CENTER);
   strokeWeight(4);
-  
+
   // draw T
   pushMatrix();
 
-  translate(width / 2 - 100, height / 2);
+  translate(width / 2 - 150, height / 2);
+      scale(SCALEFACTOR);
+
     //scale(frameCount / 100.0, 1);
   drawShape(TShape());
   popMatrix();
   
-  // draw T
+  // draw H
   pushMatrix();
-  translate(width / 2, height / 2);
+  translate(width / 2 - 10, height / 2);
+      scale(SCALEFACTOR);
+
   drawShape(HShape());
   popMatrix();
   
   //draw x
   pushMatrix();
-  translate(width /2 + 100, height / 2);
+  translate(width /2, height / 2);
+      scale(SCALEFACTOR);
+
   drawShape(XShape());
   popMatrix();
   
   // draw !
   pushMatrix();
-  translate(width / 2 + 143, height / 2 - 10);
+  translate(width / 2 + width / 7, height / 2 - 10);
+      scale(SCALEFACTOR);
+
   drawShape(ExBarShape());
     translate(-3, 10);
 
@@ -156,17 +192,17 @@ void draw() {
 
 
 void drawShape(PShape s) {
-    int rr = 3;
+    //rb = round((sin(frameCount / 100.0) + 1) * 20.0 + 1);
     PShape newShape = createShape();
     newShape.beginShape();
     newShape.noFill();
-    newShape.stroke(255);
+    newShape.stroke(0, 0, 100);
     newShape.strokeWeight(2);
 
     for (int j = 0; j < s.getVertexCount(); j++) {
       PVector v = s.getVertex(j);
       
-      newShape.vertex(v.x + random(-rr, rr) + sin(frameCount / 10.0 / 3.0) * 20, v.y + random(-rr, rr) + cos(frameCount / 10.0 / 3.0) * 20);
+      newShape.vertex(v.x + random(-rb, rb), v.y + random(-rb, rb));
     }
     newShape.endShape(CLOSE);
     shape(newShape, 0, 0);
