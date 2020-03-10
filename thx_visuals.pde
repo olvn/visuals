@@ -129,12 +129,9 @@ void draw() {
     int rr4 = round(random(-rb, rb));
     int rr5 = round(random(-rb, rb));
     int rr6 = round(random(-rb, rb));
-        int rr7 = round(random(-rb, rb));
+    int rr7 = round(random(-rb, rb));
     int rr8 = round(random(-rb, rb));
-
-
-    print(rr1, rr2, rr3, rr4, "\n");
-
+    
     fill((frameCount + (100 / 10) * i) % 100, 100, 100);
     quad(width * (i / 16.0) + rr1, 
           0 + rr2,
@@ -164,7 +161,7 @@ void draw() {
   
   // draw H
   pushMatrix();
-  translate(width / 2 - 10, height / 2);
+  translate(width / 2 - 15, height / 2);
       scale(SCALEFACTOR);
 
   drawShape(HShape());
@@ -172,7 +169,7 @@ void draw() {
   
   //draw x
   pushMatrix();
-  translate(width /2, height / 2);
+  translate(width /2 + 120, height / 2);
       scale(SCALEFACTOR);
 
   drawShape(XShape());
@@ -180,7 +177,7 @@ void draw() {
   
   // draw !
   pushMatrix();
-  translate(width / 2 + width / 7, height / 2 - 10);
+  translate(width / 2 + 176, height / 2 - 10);
       scale(SCALEFACTOR);
 
   drawShape(ExBarShape());
@@ -192,12 +189,12 @@ void draw() {
 
 
 void drawShape(PShape s) {
-    //rb = round((sin(frameCount / 100.0) + 1) * 20.0 + 1);
+    rb = max(round((sin(frameCount / 100.0) + 1) * 10.0), 2);
     PShape newShape = createShape();
     newShape.beginShape();
     newShape.noFill();
     newShape.stroke(0, 0, 100);
-    newShape.strokeWeight(2);
+    newShape.strokeWeight(3);
 
     for (int j = 0; j < s.getVertexCount(); j++) {
       PVector v = s.getVertex(j);
